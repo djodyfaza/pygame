@@ -1,8 +1,10 @@
 import pygame
+# import signage_blank
+import subprocess
 import os, sys, time
 
 # Set up display
-display_width = 495
+display_width = 485
 display_height = 700
 display = pygame.display.set_mode((display_width, display_height))
 pygame.display.set_caption("Digital Signage")
@@ -20,7 +22,7 @@ offset = display_width // 10
 clock = pygame.time.Clock()
 
 # Set up delay
-delay = 1
+delay = 4
 last_transition_time = time.time()
 
 # Main game loop
@@ -30,6 +32,12 @@ while True:
         if event.type == pygame.QUIT:
             pygame.quit()
             quit()
+        # Quit window when random clicked
+        elif event.type == pygame.MOUSEBUTTONDOWN:
+            os.system('python signage_blank.py')
+            pygame.quit()
+            quit()
+            
 
     # Create two surfaces for transition effect
     previous_surface = pygame.Surface((display_width, display_height))
@@ -50,7 +58,7 @@ while True:
         next_surface.set_alpha(255 - int(offset / (display_width / 255)))
         display.blit(previous_surface, (-offset, 0))
         display.blit(next_surface, (display_width - offset, 0))
-        offset -= 30
+        offset -= 5  # kurangi offset sebesar 5 setiap iterasi
 
     # Transition to next image when delay is over
     elif time.time() - last_transition_time >= delay:
@@ -64,15 +72,5 @@ while True:
     # Update display
     pygame.display.update()
 
-    # Print offset
-    if offset > 0:
-        previous_surface.set_alpha(int(offset / (display_width / 255)))
-        next_surface.set_alpha(255 - int(offset / (display_width / 255)))
-        display.blit(previous_surface, (-offset, 0))
-        display.blit(next_surface, (display_width - offset, 0))
-        offset -= 20
-        print(offset)
-
-
     # Set frame rate
-    clock.tick(60)
+    clock.tick(25)
