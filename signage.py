@@ -20,7 +20,7 @@ offset = display_width // 10
 clock = pygame.time.Clock()
 
 # Set up delay
-delay = 5
+delay = 1
 last_transition_time = time.time()
 
 # Main game loop
@@ -50,7 +50,7 @@ while True:
         next_surface.set_alpha(255 - int(offset / (display_width / 255)))
         display.blit(previous_surface, (-offset, 0))
         display.blit(next_surface, (display_width - offset, 0))
-        offset -= 20
+        offset -= 30
 
     # Transition to next image when delay is over
     elif time.time() - last_transition_time >= delay:
@@ -64,7 +64,15 @@ while True:
     # Update display
     pygame.display.update()
 
+    # Print offset
+    if offset > 0:
+        previous_surface.set_alpha(int(offset / (display_width / 255)))
+        next_surface.set_alpha(255 - int(offset / (display_width / 255)))
+        display.blit(previous_surface, (-offset, 0))
+        display.blit(next_surface, (display_width - offset, 0))
+        offset -= 20
+        print(offset)
+
+
     # Set frame rate
     clock.tick(60)
-
-#Test tambah aja
