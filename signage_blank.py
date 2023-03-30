@@ -1,4 +1,5 @@
 import pygame
+import os, sys
 
 pygame.init()
 
@@ -13,8 +14,10 @@ while running:
         if event.type == pygame.QUIT:
             running = False
         elif event.type == pygame.MOUSEBUTTONDOWN:
+            os.system('python signage.py')
             pygame.quit()
             quit()
+            
     pygame.display.update()
 
 # Exit when clicked

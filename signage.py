@@ -74,3 +74,7 @@ while True:
 
     # Set frame rate
     clock.tick(25)
+
+if __name__=='__main__':
+	obj=change_image()
+	obj.main()
