@@ -21,7 +21,7 @@ offset = display_width // 10
 clock = pygame.time.Clock()
 
 # Set up delay
-delay = 4
+delay = 5
 last_transition_time = time.time()
 
 # Main game loop
