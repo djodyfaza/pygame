@@ -1,6 +1,5 @@
 import pygame
-import os, sys
-import time
+import os, sys, time
 
 # Set up display
 display_width = 495
