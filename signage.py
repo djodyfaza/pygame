@@ -66,3 +66,5 @@ while True:
 
     # Set frame rate
     clock.tick(60)
+
+#Test tambah aja
