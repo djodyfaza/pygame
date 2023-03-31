@@ -1,5 +1,6 @@
 import pygame
 import subprocess
+import sys
 
 pygame.init()
 
@@ -14,10 +15,10 @@ while running:
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
             running = False
-            subprocess.Popen(['python', 'signage.py'])
+            subprocess.Popen(['python', 'signage-new.py'])
         elif event.type == pygame.MOUSEBUTTONDOWN:
             running = False  # Close the current window when mouse is clicked
-            subprocess.Popen(['python', 'signage.py'])
+            subprocess.Popen(['python', 'signage-new.py'])
     pygame.display.update()
 
 pygame.quit()
