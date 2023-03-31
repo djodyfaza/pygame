@@ -19,7 +19,7 @@ offset = dis_wid // 10
 # Set up clock
 clock = pygame.time.Clock()
 
-# Set up delayx
+# Set up delay
 delay = 4
 last_transition_time = time.time()
 
@@ -57,10 +57,6 @@ while True:
         display.blit(next_surface, (dis_wid - offset, 0))
         offset -= 5  # Decrease offset for 5 iteration
 
-    elif time.time() - last_transition_time >= delay:
-        current_index = next_index
-        current_image = next_image
-        
 
     # Transition to next image when delay is over
     elif time.time() - last_transition_time >= delay:
@@ -76,3 +72,7 @@ while True:
 
     # Set frame rate
     clock.tick(25)
+
+if __name__=='__main__':
+	obj=change_image()
+	obj.main()
