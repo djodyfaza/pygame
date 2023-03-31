@@ -23,18 +23,19 @@ clock = pygame.time.Clock()
 delay = 4
 last_transition_time = time.time()
 
+# Initialize window switching variable
+switch_window = False
+
 # Main game loop
 while True:
     # Event handling
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
             pygame.quit()
-            quit()
-        # Quit window when random clicked
+            sys.exit()
+        # Set switch_window variable to True when random clicked
         elif event.type == pygame.MOUSEBUTTONDOWN:
-            subprocess.Popen(['python', 'signage_blank.py'])
-            pygame.quit()
-            quit()
+            switch_window = True
 
     # Create two surfaces for transition effect
     previous_surface = pygame.Surface((dis_wid, dis_hei))
@@ -73,6 +74,8 @@ while True:
     # Set frame rate
     clock.tick(25)
 
-if __name__=='__main__':
-	obj=change_image()
-	obj.main()
+    # Switch to blank window if switch_window variable is True
+    if switch_window:
+        subprocess.Popen(['python', 'signage_blank.py'])
+        pygame.quit()
+        sys.exit()
