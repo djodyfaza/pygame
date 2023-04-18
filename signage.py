@@ -1,6 +1,9 @@
 import pygame
 import os, sys, time, subprocess
+import moviepy
+from moviepy.video.io.VideoFileClip import VideoFileClip
 
+os.environ["IMAGEIO_FFMPEG_EXE"] = "/usr/bin/ffmpeg"
 
 # Set up display
 dis_hei, dis_wid = 700, 485
@@ -22,6 +25,11 @@ clock = pygame.time.Clock()
 # Set up delay
 delay = 4
 last_transition_time = time.time()
+
+# Set up video
+video_file = os.path.join(os.path.dirname(__file__), 'ads.mp4')
+clip = VideoFileClip(video_file)
+video_playing = False
 
 # Main game loop
 while True:
@@ -57,6 +65,11 @@ while True:
         display.blit(next_surface, (dis_wid - offset, 0))
         offset -= 5  # Decrease offset for 5 iteration
 
+    # Play video
+    elif not video_playing:
+        clip.preview(fps=25, winheight=dis_hei, winwidth=dis_wid)
+        video_playing = True
+        last_transition_time = time.time()
 
     # Transition to next image when delay is over
     elif time.time() - last_transition_time >= delay:
@@ -65,6 +78,7 @@ while True:
         next_index = (current_index + 1) % len(images)
         next_image = pygame.image.load(os.path.join(img_dir, images[next_index]))
         offset = dis_wid // 10
+        video_playing = False
         last_transition_time = time.time()
 
     # Update display
@@ -72,7 +86,3 @@ while True:
 
     # Set frame rate
     clock.tick(25)
-
-if __name__=='__main__':
-	obj=change_image()
-	obj.main()
